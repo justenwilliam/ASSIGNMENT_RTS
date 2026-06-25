@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "author": "Greenhouse FreeRTOS",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "pot1",
+      "top": -120,
+      "left": -140,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -140,
+      "left": 120,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "pumpLed",
+      "top": 40,
+      "left": -180,
+      "attrs": {
+        "color": "blue"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 100,
+      "left": -180,
+      "rotate": 90,
+      "attrs": {
+        "value": "330"
+      }
+    },
+    {
+      "type": "wokwi-logic-analyzer",
+      "id": "logic1",
+      "top": -20,
+      "left": 300,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": 180,
+      "left": 40,
+      "attrs": {
+        "pins": "i2c"
+      }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+
+    [ "pot1:VCC", "esp:3V3", "red", [] ],
+    [ "pot1:GND", "esp:GND.1", "black", [] ],
+    [ "pot1:SIG", "esp:34", "green", [] ],
+
+    [ "dht1:VCC", "esp:3V3", "red", [] ],
+    [ "dht1:GND", "esp:GND.1", "black", [] ],
+    [ "dht1:SDA", "esp:15", "green", [] ],
+
+    [ "esp:26", "pumpLed:A", "green", [] ],
+    [ "pumpLed:C", "r1:1", "green", [] ],
+    [ "r1:2", "esp:GND.1", "green", [] ],
+
+    [ "esp:13", "logic1:D0", "yellow", [] ],
+    [ "esp:12", "logic1:D1", "yellow", [] ],
+
+    [ "lcd1:GND", "esp:GND.2", "black", [] ],
+    [ "lcd1:VCC", "esp:5V", "red", [] ],
+    [ "lcd1:SDA", "esp:21", "blue", [] ],
+    [ "lcd1:SCL", "esp:22", "orange", [] ]
+  ]
+}
